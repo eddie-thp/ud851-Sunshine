@@ -213,15 +213,24 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
             mForecastAdapter.setWeatherData(null);
             loadWeatherData();
             return true;
         }
+        // (2) Launch the map when the map menu item is clicked
+        else if (id == R.id.action_map) {
 
-        // TODO (2) Launch the map when the map menu item is clicked
+            Uri mapUri = Uri.parse("geo:0,0?q=5108 Penn Av S, Minneapolis, MN");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+
+            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(mapIntent);
+            }
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
