@@ -351,6 +351,7 @@ public class MainActivity extends AppCompatActivity implements
         {
             Intent settingsActivityIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsActivityIntent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

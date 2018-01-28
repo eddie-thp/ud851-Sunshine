@@ -67,6 +67,7 @@ public class DetailActivity extends AppCompatActivity {
             {
                 Intent settingsActivityIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsActivityIntent);
+                return true;
             }
         }
 
