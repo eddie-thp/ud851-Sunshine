@@ -210,10 +210,16 @@ public class MainActivity extends AppCompatActivity implements
         // COMPLETED (24) Remove the loadInBackground method declaration
         // COMPLETED (25) Remove the deliverResult method declaration
 
-        // TODO how do I check this ?
-
-        //          TODO (22) If the loader requested is our forecast loader, return the appropriate CursorLoader
-        return new CursorLoader(this, WeatherContract.WeatherEntry.CONTENT_URI, null, null, null, null);
+        // COMPLETED (22) If the loader requested is our forecast loader, return the appropriate CursorLoader
+        switch (id) {
+            case ID_FORECAST_LOADER:
+                String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
+                String selection = WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards();
+                // TODO return new CursorLoader(this, WeatherContract.WeatherEntry.CONTENT_URI, MAIN_FORECAST_PROJECTION, selection, null, sortOrder);
+                return new CursorLoader(this, WeatherContract.WeatherEntry.CONTENT_URI, null, null, null, sortOrder);
+            default:
+                throw new RuntimeException("Loade ID invalid: " + id);
+        }
     }
 
     /**

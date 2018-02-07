@@ -107,12 +107,12 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         final int offSet = position - cursorPosition;
         mCursor.move(offSet);
 
+        // TODO Note that the IDs are expected to be created in TODO 17 in MainActivity
         // COMPLETED (7) Generate a weather summary with the date, description, high and low
         final long date = mCursor.getLong(mCursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATE));
-        final int _id = mCursor.getInt(mCursor.getColumnIndex(WeatherContract.WeatherEntry._ID));
+        final int weatherId = mCursor.getInt(mCursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
         final double maxTemp = mCursor.getFloat(mCursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
         final double minTemp = mCursor.getFloat(mCursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
-
 
         // COMPLETED (8) Display the summary that you created above
 
@@ -122,7 +122,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         StringBuilder builder = new StringBuilder();
         builder.append(sdf.format(new Date(date)));
         builder.append(" - ");
-        builder.append(SunshineWeatherUtils.getStringForWeatherCondition(mContext, _id));
+        builder.append(SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId));
         builder.append(" - ");
         builder.append(SunshineWeatherUtils.formatHighLows(mContext, maxTemp, minTemp));
 
@@ -179,7 +179,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
             // COMPLETED (13) Instead of passing the String from the data array, use the weatherSummary text!
             int adapterPosition = getAdapterPosition();
 
-            String weatherForDay = ((TextView)v.findViewById(R.id.tv_weather_data)).toString();
+            String weatherForDay = ((TextView)v.findViewById(R.id.tv_weather_data)).getText().toString();
 
             mClickHandler.onClick(weatherForDay);
         }
