@@ -312,7 +312,7 @@ public class WeatherProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case CODE_WEATHER:
-                count = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, null, null);
+                count = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unsupported URI: " + uri.toString());
